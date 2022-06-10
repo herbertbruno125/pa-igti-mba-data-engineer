@@ -5,7 +5,7 @@ import dateutil.relativedelta
 import pandas as pd
 import requests
 
-TOKEN = '6bb4f0cf0cac856708ba7a9aabd0886c'
+TOKEN = ''
 
 if __name__ == '__main__':
     df = pd.read_json('/home/herbert/Documents/projeto_aplicado/inputs/ibge_trat/municipality.json',
