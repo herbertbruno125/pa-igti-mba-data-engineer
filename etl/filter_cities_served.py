@@ -13,13 +13,13 @@ s3_client = boto3.client('s3',
 
 def __add_input() -> DataFrame:
     print('Add input file to filter')
-    resp = s3_client.get_object(Bucket='dcb-staging-zone', Key='de-para-ibge/municipality.json')
+    resp = s3_client.get_object(Bucket='dcb-raw-zone', Key='de-para-ibge/municipality.json')
     df = pd.read_json(io.BytesIO(resp['Body'].read()), lines=True)
     return df
 
 
 def __extract_initials():
-    resp = s3_client.get_object(Bucket='dcb-staging-zone', Key='estados_atendidos/estados_atendidos.json')
+    resp = s3_client.get_object(Bucket='dcb-raw-zone', Key='estados_atendidos/estados_atendidos.json')
     df = pd.read_json(io.BytesIO(resp['Body'].read()), lines=True)
     res = list(df['sigla'])
     return res
@@ -45,3 +45,7 @@ def lambda_handler(event, context):
     df = __add_input()
     filter_df: DataFrame = __filter_rules(df, __extract_initials())
     __write_records(filter_df)
+
+
+if __name__ == '__main__':
+    lambda_handler('', '')

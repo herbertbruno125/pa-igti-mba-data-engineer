@@ -10,8 +10,6 @@ import requests
 TOKEN = ''
 
 s3_client = boto3.client('s3',
-                         aws_access_key_id='',
-                         aws_secret_access_key='',
                          region_name='us-east-2')
 
 reference_month = datetime.date.today() - dateutil.relativedelta.relativedelta(months=9)
@@ -35,7 +33,6 @@ def cities_served():
 def lambda_handler(event, context):
     codes = cities_served()
     count = 0
-    time.sleep(60)
     for cod_city in codes:
         count += 1
         print(f'run for {cod_city} number {count} from {len(codes)}')

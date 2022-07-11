@@ -57,3 +57,7 @@ def lambda_handler(event, context):
     s3_client.put_object(Body=csv_buffer.getvalue(),
                          Bucket=write_bucket,
                          Key=write_key)
+
+
+if __name__ == '__main__':
+    lambda_handler('', '')
